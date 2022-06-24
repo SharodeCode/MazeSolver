@@ -14,9 +14,9 @@ namespace MazeSolver
         {
             Bitmap img = null;
 
-            String test = Environment.CurrentDirectory + @"\Mazes\63x63\Maze_Diagonal_1.bmp";
+            String test = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\63x63\Maze_Diagonal_1.bmp";
 
-            img = new Bitmap(test, true);
+            img = new Bitmap(test);
 
             int[,] result = new int[img.Width, img.Height];
 

@@ -20,12 +20,6 @@ namespace MazeSolver
         public Form1()
         {
             InitializeComponent();
-
-            BitmapLoader bl = new BitmapLoader();
-
-            int[,] test = bl.ImageLoader();
-
-            maze = new Maze(test);
         }
 
         private void pictureBox1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -52,6 +46,9 @@ namespace MazeSolver
         {
             int[,] mazeArray = maze.getMazeArray();
 
+            maze.visualiseJunctions();
+            maze.visualisePaths();
+
             int width = mazeArray.GetLength(1);
             int height = mazeArray.GetLength(0);
 
@@ -73,7 +70,10 @@ namespace MazeSolver
                     {
                         bmp.SetPixel(i, j, Color.Red);
                     }
-
+                    else if (mazeArray[i, j] == 3)
+                    {
+                        bmp.SetPixel(i, j, Color.Green);
+                    }
                 }
             }
 
@@ -87,7 +87,13 @@ namespace MazeSolver
 
         private void load_Click(object sender, EventArgs e)
         {
-            Bitmap image = new Bitmap(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\63x63\Maze_Diagonal_1.bmp");
+            BitmapLoader bl = new BitmapLoader();
+
+            int[,] test = bl.ImageLoader();
+
+            maze = new Maze(test);
+
+            Bitmap image = new Bitmap(bl.test);
 
             image = ResizeBitmap(image, 441, 441);
 

@@ -10,11 +10,17 @@ namespace MazeSolver
 {
     class BitmapLoader
     {
+        public String test { get; set; }
+
+        public BitmapLoader()
+        {
+            test = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\63x63\Maze_Diagonal_1.bmp";
+            //test = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\21x21\test.bmp";
+        }
+
         public int[,] ImageLoader()
         {
             Bitmap img = null;
-
-            String test = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\63x63\Maze_Diagonal_1.bmp";
 
             img = new Bitmap(test);
 

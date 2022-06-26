@@ -17,10 +17,6 @@ namespace MazeSolver
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-
-            BitmapLoader bl = new BitmapLoader();
-
-            int[,] test = bl.ImageLoader();
         }
     }
 }

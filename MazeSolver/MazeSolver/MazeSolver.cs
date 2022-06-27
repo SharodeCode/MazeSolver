@@ -13,19 +13,15 @@ using System.Windows.Forms;
 
 namespace MazeSolver
 {
-    public partial class Form1 : Form
+    public partial class MazeSolver : Form
     {
         private Maze maze;
 
-        public Form1()
+        Bitmap image;
+
+        public MazeSolver()
         {
             InitializeComponent();
-        }
-
-        private void pictureBox1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-        {
-
-
         }
 
         private Bitmap ResizeBitmap(Bitmap image, int width, int height)
@@ -52,7 +48,7 @@ namespace MazeSolver
             int width = mazeArray.GetLength(1);
             int height = mazeArray.GetLength(0);
 
-            Bitmap bmp = new Bitmap(width, height);
+            image = new Bitmap(width, height);
 
             for (int i = 0; i < mazeArray.GetLength(0); i++)
             {
@@ -60,29 +56,28 @@ namespace MazeSolver
                 {
                     if(mazeArray[i, j] == 0)
                     {
-                        bmp.SetPixel(i, j, Color.Black);
+                        image.SetPixel(i, j, Color.Black);
                     }
                     else if (mazeArray[i, j] == 1)
                     {
-                        bmp.SetPixel(i, j, Color.White);
+                        image.SetPixel(i, j, Color.White);
                     }
                     else if (mazeArray[i, j] == 2)
                     {
-                        bmp.SetPixel(i, j, Color.Red);
+                        image.SetPixel(i, j, Color.Red);
                     }
                     else if (mazeArray[i, j] == 3)
                     {
-                        bmp.SetPixel(i, j, Color.Green);
+                        image.SetPixel(i, j, Color.Green);
                     }
                 }
             }
 
-            bmp = ResizeBitmap(bmp, 441, 441);
+            image = ResizeBitmap(image, 441, 441);
 
             
-            pictureBox1.Image = bmp;
+            pictureBox1.Image = image;
             pictureBox1.Refresh();
-            bmp.Save("myfile.bmp");
         }
 
         private void load_Click(object sender, EventArgs e)
@@ -93,11 +88,16 @@ namespace MazeSolver
 
             maze = new Maze(test);
 
-            Bitmap image = new Bitmap(bl.test);
+            image = new Bitmap(bl.test);
 
             image = ResizeBitmap(image, 441, 441);
 
             pictureBox1.Image = image;
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            image.Save("myfile.bmp");
         }
     }
 }

@@ -9,6 +9,8 @@ namespace MazeSolver
     class MazeGraph
     {
         int[,] maze = null;
+        public MazeJunction startJunction { get; set; }
+        public MazeJunction endJunction { get; set; }
         List<MazeJunction> junctions = new List<MazeJunction>();
 
         // Used to detect when a pathways is needed
@@ -40,6 +42,7 @@ namespace MazeSolver
                     verticalJunctions.Add(newJunction);
 
                     junctions.Add(newJunction);
+                    startJunction = newJunction;
                 }
             }
 
@@ -67,7 +70,6 @@ namespace MazeSolver
                         eastClear = false;
                         westNode = null;
                     }
-
                 }
             }
 
@@ -84,6 +86,8 @@ namespace MazeSolver
                     verticalJunctions.Remove(verticalJunctions.First());
 
                     junctions.Add(newJunction);
+
+                    endJunction = newJunction;
                 }
             }
         }

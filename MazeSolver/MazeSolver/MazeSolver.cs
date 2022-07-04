@@ -43,7 +43,7 @@ namespace MazeSolver
             int[,] mazeArray = maze.getMazeArray();
 
             maze.visualiseJunctions();
-            maze.visualisePaths();
+            //maze.visualisePaths();
 
             int width = mazeArray.GetLength(1);
             int height = mazeArray.GetLength(0);
@@ -69,6 +69,10 @@ namespace MazeSolver
                     else if (mazeArray[i, j] == 3)
                     {
                         image.SetPixel(i, j, Color.Green);
+                    }
+                    else if (mazeArray[i, j] == 4)
+                    {
+                        image.SetPixel(i, j, Color.Yellow);
                     }
                 }
             }
@@ -98,6 +102,15 @@ namespace MazeSolver
         private void save_Click(object sender, EventArgs e)
         {
             image.Save("myfile.bmp");
+        }
+
+        private void solve_Click(object sender, EventArgs e)
+        {
+            SolvingAlgorithm solver = new SolvingAlgorithm();
+
+            List<MazeJunction> solution = solver.BreadthFirst(maze);
+
+            maze.printSolution(solution);
         }
     }
 }

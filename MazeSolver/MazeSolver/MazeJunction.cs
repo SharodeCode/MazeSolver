@@ -11,6 +11,8 @@ namespace MazeSolver
         int locationX = -1;
         int locationY = -1;
 
+        public bool visited { get; set; }
+
         public MazeJunction north { get; set; }
         public MazeJunction south { get; set; }
         public MazeJunction east { get; set; }
@@ -32,6 +34,8 @@ namespace MazeSolver
             south = null;
             east = null;
             west = null;
+
+            visited = false;
         }
 
         public void addPath(DirectionType direction, MazeJunction connectorNode)

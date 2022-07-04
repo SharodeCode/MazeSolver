@@ -58,6 +58,7 @@
     <Compile Include="MazeJunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolvingAlgorithm.cs" />
     <EmbeddedResource Include="MazeSolver.resx">
       <DependentUpon>MazeSolver.cs</DependentUpon>
     </EmbeddedResource>

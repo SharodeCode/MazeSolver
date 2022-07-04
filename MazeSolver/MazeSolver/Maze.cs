@@ -10,6 +10,7 @@ namespace MazeSolver
     {
         int[,] maze = null;
         MazeGraph mazeGraph = null;
+        public int size { get; set; }
 
         public Maze(int[,] maze)
         {
@@ -17,6 +18,17 @@ namespace MazeSolver
 
             mazeGraph = new MazeGraph(maze);
 
+            size = mazeGraph.getJunctions().Count;
+        }
+
+        public MazeJunction getStartJunction()
+        {
+            return mazeGraph.startJunction;
+        }
+
+        public MazeJunction getEndJunction()
+        {
+            return mazeGraph.endJunction;
         }
 
         public int[,] getMazeArray()
@@ -67,6 +79,57 @@ namespace MazeSolver
                         maze[i, m.getYCoordinate()] = 3;
                     }
                 }
+            }
+        }
+
+        public void connectJunctions(MazeJunction start, MazeJunction end)
+        {
+            
+            if (start.getXCoordinate() == end.getXCoordinate())
+            {
+                if(start.getYCoordinate() > end.getYCoordinate())
+                {
+                    for (int i = start.getYCoordinate(); i >= end.getYCoordinate(); i--)
+                    {
+                        maze[start.getXCoordinate(), i] = 4;
+                    }
+                }
+                else if (start.getYCoordinate() < end.getYCoordinate())
+                {
+                    for (int i = start.getYCoordinate(); i <= end.getYCoordinate(); i++)
+                    {
+                        maze[start.getXCoordinate(), i] = 4;
+                    }
+                }
+            }
+            else if (start.getYCoordinate() == end.getYCoordinate())
+            {
+                if (start.getXCoordinate() > end.getXCoordinate())
+                {
+                    for (int i = start.getXCoordinate(); i >= end.getXCoordinate(); i--)
+                    {
+                        maze[i, start.getYCoordinate()] = 4;
+                    }
+                }
+                else if (start.getXCoordinate() < end.getXCoordinate())
+                {
+                    for (int i = start.getXCoordinate(); i <= end.getXCoordinate(); i++)
+                    {
+                        maze[i, start.getYCoordinate()] = 4;
+                    }
+                }
+            }
+        }
+
+        public void printSolution(List<MazeJunction> solution)
+        {
+            MazeJunction previous = solution.First();
+
+            foreach (MazeJunction next in solution.Skip(1))
+            {
+                connectJunctions(previous, next);
+
+                previous = next;
             }
         }
     }

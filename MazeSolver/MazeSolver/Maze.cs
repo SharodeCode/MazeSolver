@@ -11,6 +11,15 @@ namespace MazeSolver
         int[,] maze = null;
         MazeGraph mazeGraph = null;
         public int size { get; set; }
+        public enum MazeType
+        {
+            Wall = 0,
+            Path = 1,
+            Junction = 2,
+            JunctionConnection = 3,
+            Solution = 4,
+        }
+
 
         public Maze(int[,] maze)
         {
@@ -36,11 +45,19 @@ namespace MazeSolver
             return maze;
         }
 
-        public void visualiseJunctions()
+        public void showJunctions()
         {
             foreach (MazeJunction m in mazeGraph.getJunctions())
             {
-                maze[m.getXCoordinate(), m.getYCoordinate()] = 2;
+                maze[m.getXCoordinate(), m.getYCoordinate()] = (int)Maze.MazeType.Junction;
+            }
+        }
+
+        public void hideJunctions()
+        {
+            foreach (MazeJunction m in mazeGraph.getJunctions())
+            {
+                maze[m.getXCoordinate(), m.getYCoordinate()] = (int)Maze.MazeType.Path;
             }
         }
 

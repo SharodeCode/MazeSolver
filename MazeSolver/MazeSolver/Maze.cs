@@ -61,7 +61,7 @@ namespace MazeSolver
             }
         }
 
-        public void visualisePaths()
+        public void showPaths()
         {
             foreach (MazeJunction m in mazeGraph.getJunctions())
             {
@@ -69,7 +69,7 @@ namespace MazeSolver
                 {
                     for(int i = (m.getYCoordinate() - 1); i > m.north.getYCoordinate(); i--)
                     {
-                        maze[m.getXCoordinate(), i] = 3;
+                        maze[m.getXCoordinate(), i] = (int)Maze.MazeType.JunctionConnection;
                     }
                 }
 
@@ -77,7 +77,7 @@ namespace MazeSolver
                 {
                     for (int i = (m.getYCoordinate() + 1); i < m.south.getYCoordinate(); i++)
                     {
-                        maze[m.getXCoordinate(), i] = 3;
+                        maze[m.getXCoordinate(), i] = (int)Maze.MazeType.JunctionConnection;
                     }
                 }
 
@@ -85,7 +85,7 @@ namespace MazeSolver
                 {
                     for (int i = (m.getXCoordinate() + 1); i < m.east.getXCoordinate(); i++)
                     {
-                        maze[i, m.getYCoordinate()] = 3;
+                        maze[i, m.getYCoordinate()] = (int)Maze.MazeType.JunctionConnection;
                     }
                 }
 
@@ -93,7 +93,21 @@ namespace MazeSolver
                 {
                     for (int i = (m.getYCoordinate() - 1); i > m.west.getYCoordinate(); i--)
                     {
-                        maze[i, m.getYCoordinate()] = 3;
+                        maze[i, m.getYCoordinate()] = (int)Maze.MazeType.JunctionConnection;
+                    }
+                }
+            }
+        }
+
+        public void hidePaths()
+        {
+            for (int i = 1; i < (maze.GetLength(1) - 1); i++)
+            {
+                for (int j = 1; j < (maze.GetLength(0) - 1); j++)
+                {
+                    if (maze[j, i] == (int)Maze.MazeType.JunctionConnection)
+                    {
+                        maze[j, i] = (int)Maze.MazeType.Path;
                     }
                 }
             }
@@ -108,14 +122,14 @@ namespace MazeSolver
                 {
                     for (int i = start.getYCoordinate(); i >= end.getYCoordinate(); i--)
                     {
-                        maze[start.getXCoordinate(), i] = 4;
+                        maze[start.getXCoordinate(), i] = (int)Maze.MazeType.Solution;
                     }
                 }
                 else if (start.getYCoordinate() < end.getYCoordinate())
                 {
                     for (int i = start.getYCoordinate(); i <= end.getYCoordinate(); i++)
                     {
-                        maze[start.getXCoordinate(), i] = 4;
+                        maze[start.getXCoordinate(), i] = (int)Maze.MazeType.Solution;
                     }
                 }
             }
@@ -125,14 +139,14 @@ namespace MazeSolver
                 {
                     for (int i = start.getXCoordinate(); i >= end.getXCoordinate(); i--)
                     {
-                        maze[i, start.getYCoordinate()] = 4;
+                        maze[i, start.getYCoordinate()] = (int)Maze.MazeType.Solution;
                     }
                 }
                 else if (start.getXCoordinate() < end.getXCoordinate())
                 {
                     for (int i = start.getXCoordinate(); i <= end.getXCoordinate(); i++)
                     {
-                        maze[i, start.getYCoordinate()] = 4;
+                        maze[i, start.getYCoordinate()] = (int)Maze.MazeType.Solution;
                     }
                 }
             }

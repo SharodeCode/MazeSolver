@@ -15,7 +15,9 @@ namespace MazeSolver
         public BitmapLoader()
         {
             //directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\63x63\Maze_Diagonal_1.bmp";
-            directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\21x21\big.bmp";
+            //directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\21x21\big.bmp";
+
+            directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\63x63\Maze_Prims_1.bmp";
         }
 
         public int[,] ImageLoader()

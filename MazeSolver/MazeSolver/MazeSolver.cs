@@ -18,13 +18,26 @@ namespace MazeSolver
         private Maze maze;
 
         Bitmap image;
-        int imageWidth = 1000;
-        int imageHeight = 1000;
+        int imageWidth = 500;
+        int imageHeight = 500;
 
         TimeSpan loadImageTime;
         TimeSpan solveMazeTime;
 
         List<Panel> subMenuPanels = new List<Panel>();
+
+        bool visibleJunctions = false;
+        bool visiblePathways = false;
+        bool visibleSolution = false;
+
+        bool visibleMaze = false;
+
+        public enum VisualisationType
+        {
+            Junctions = 0,
+            Pathways = 1,
+            Solution = 2,
+        }
 
         public MazeSolver()
         {
@@ -32,6 +45,7 @@ namespace MazeSolver
 
             subMenuPanels.Add(panelFileSubmenu);
             subMenuPanels.Add(panelSolveSubmenu);
+            subMenuPanels.Add(panelOtherSubmenu);
 
             InitialiseDesign();
         }
@@ -42,6 +56,9 @@ namespace MazeSolver
             {
                 panel.Visible = false;
             }
+
+            panelMazeSoler.Visible = false;
+            panelTitle.Visible = true;
         }
 
         private void HideSubmenu()
@@ -65,6 +82,19 @@ namespace MazeSolver
             else
             {
                 subMenu.Visible = false;
+            }
+        }
+
+        private void HideOtherVisualisations(VisualisationType type)
+        {
+            if (visibleJunctions && type != VisualisationType.Junctions)
+            {
+                showJunctions_Click(btnShowJunctions, EventArgs.Empty);
+            }
+
+            if (visiblePathways && type != VisualisationType.Pathways)
+            {
+                btnShowPaths_Click(btnShowPaths, EventArgs.Empty);
             }
         }
 
@@ -120,33 +150,75 @@ namespace MazeSolver
 
             image = ResizeBitmap(image, imageWidth, imageHeight);
 
-            pictureBox1.Image = image;
-            pictureBox1.Refresh();
+            pictureBoxMaze.Image = image;
+            pictureBoxMaze.Refresh();
         }
 
         private void showJunctions_Click(object sender, EventArgs e)
         {
+            if (!visibleMaze)
+                return;
+
+            HideOtherVisualisations(VisualisationType.Junctions);
+
             Button clickedButton = (Button)sender;
 
-            if (clickedButton.Text.Equals("Show Junctions"))
+            if (!visibleJunctions)
             {
                 maze.showJunctions();
                 RefreshBitmap();
 
                 clickedButton.Text = "Hide Junctions";
+
+                visibleJunctions = true;
             }
-            else if (clickedButton.Text.Equals("Hide Junctions"))
+            else if (visibleJunctions)
             {
                 maze.hideJunctions();
                 RefreshBitmap();
 
                 clickedButton.Text = "Show Junctions";
+
+                visibleJunctions = false;
             }
 
         }
 
+        private void btnShowPaths_Click(object sender, EventArgs e)
+        {
+            if (!visibleMaze)
+                return;
+
+            HideOtherVisualisations(VisualisationType.Pathways);
+
+            Button clickedButton = (Button)sender;
+
+            if (!visiblePathways)
+            {
+                maze.showPaths();
+                RefreshBitmap();
+
+                clickedButton.Text = "Hide Pathways";
+
+                visiblePathways = true;
+            }
+            else if (visiblePathways)
+            {
+                maze.hidePaths();
+                RefreshBitmap();
+
+                clickedButton.Text = "Show Pathways";
+
+                visiblePathways = false;
+            }
+        }
+
         private void load_Click(object sender, EventArgs e)
         {
+
+            panelMazeSoler.Visible = true;
+            panelTitle.Visible = false;
+
             // Start Timer
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
             
@@ -158,14 +230,21 @@ namespace MazeSolver
 
             image = ResizeBitmap(image, imageWidth, imageHeight);
 
-            pictureBox1.Image = image;
-
+            pictureBoxMaze.Width = image.Width;
+            panelMazeImage.Width = image.Width;
+            pictureBoxMaze.Height = image.Height;
+            panelMazeImage.Height = image.Height;
+            pictureBoxMaze.Image = image;
+            this.Width = image.Width + 1000;
+            this.Height = image.Height + 250;
             maze = new Maze(test);
 
             // Stop timer and print results
             watch.Stop();
             loadImageTime = watch.Elapsed;
             labelMazeLoadTime.Text = "Maze Load Time: " + loadImageTime.Minutes.ToString() + ":" + loadImageTime.Seconds.ToString() + ":" + loadImageTime.Milliseconds.ToString();
+
+            visibleMaze = true;
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -175,6 +254,11 @@ namespace MazeSolver
 
         private void btnBFS_Click(object sender, EventArgs e)
         {
+            if (!visibleMaze)
+                return;
+
+            HideOtherVisualisations(VisualisationType.Solution);
+
             // Start Timer
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
@@ -190,6 +274,8 @@ namespace MazeSolver
             maze.printSolution(solution);
 
             RefreshBitmap();
+
+            visibleSolution = true;
         }
 
         private void btnFile_Click(object sender, EventArgs e)
@@ -200,6 +286,11 @@ namespace MazeSolver
         private void btnSolve_Click(object sender, EventArgs e)
         {
             ShowSubMenu(panelSolveSubmenu);
+        }
+
+        private void btnOther_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(panelOtherSubmenu);
         }
 
     }

@@ -53,6 +53,9 @@ namespace MazeSolver
             this.panelOtherSubmenu = new System.Windows.Forms.Panel();
             this.btnShowPaths = new System.Windows.Forms.Button();
             this.btnOther = new System.Windows.Forms.Button();
+            this.btnLargeMaze = new System.Windows.Forms.Button();
+            this.btnMediumMaze = new System.Windows.Forms.Button();
+            this.btnSmallMaze = new System.Windows.Forms.Button();
             this.panelTimers.SuspendLayout();
             this.panelChildForm.SuspendLayout();
             this.panelMazeSoler.SuspendLayout();
@@ -75,7 +78,7 @@ namespace MazeSolver
             this.panelTimers.Controls.Add(this.labelMazeLoadTime);
             this.panelTimers.Location = new System.Drawing.Point(0, 0);
             this.panelTimers.Name = "panelTimers";
-            this.panelTimers.Size = new System.Drawing.Size(448, 456);
+            this.panelTimers.Size = new System.Drawing.Size(390, 456);
             this.panelTimers.TabIndex = 9;
             // 
             // labelMazeSolveTime
@@ -135,7 +138,7 @@ namespace MazeSolver
             this.panelMazeImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMazeImage.Location = new System.Drawing.Point(0, 0);
             this.panelMazeImage.Name = "panelMazeImage";
-            this.panelMazeImage.Size = new System.Drawing.Size(843, 761);
+            this.panelMazeImage.Size = new System.Drawing.Size(844, 761);
             this.panelMazeImage.TabIndex = 11;
             // 
             // pictureBoxMaze
@@ -145,7 +148,7 @@ namespace MazeSolver
             this.pictureBoxMaze.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxMaze.Name = "pictureBoxMaze";
             this.pictureBoxMaze.Padding = new System.Windows.Forms.Padding(100, 100, 0, 0);
-            this.pictureBoxMaze.Size = new System.Drawing.Size(843, 761);
+            this.pictureBoxMaze.Size = new System.Drawing.Size(844, 761);
             this.pictureBoxMaze.TabIndex = 0;
             this.pictureBoxMaze.TabStop = false;
             // 
@@ -153,9 +156,9 @@ namespace MazeSolver
             // 
             this.panelMazeTimers.Controls.Add(this.panelTimers);
             this.panelMazeTimers.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelMazeTimers.Location = new System.Drawing.Point(843, 0);
+            this.panelMazeTimers.Location = new System.Drawing.Point(844, 0);
             this.panelMazeTimers.Name = "panelMazeTimers";
-            this.panelMazeTimers.Size = new System.Drawing.Size(391, 761);
+            this.panelMazeTimers.Size = new System.Drawing.Size(390, 761);
             this.panelMazeTimers.TabIndex = 10;
             // 
             // panelTitle
@@ -219,12 +222,15 @@ namespace MazeSolver
             // panelFileSubmenu
             // 
             this.panelFileSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panelFileSubmenu.Controls.Add(this.btnLargeMaze);
+            this.panelFileSubmenu.Controls.Add(this.btnMediumMaze);
+            this.panelFileSubmenu.Controls.Add(this.btnSmallMaze);
             this.panelFileSubmenu.Controls.Add(this.load);
             this.panelFileSubmenu.Controls.Add(this.save);
             this.panelFileSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelFileSubmenu.Location = new System.Drawing.Point(0, 145);
             this.panelFileSubmenu.Name = "panelFileSubmenu";
-            this.panelFileSubmenu.Size = new System.Drawing.Size(250, 80);
+            this.panelFileSubmenu.Size = new System.Drawing.Size(250, 200);
             this.panelFileSubmenu.TabIndex = 5;
             // 
             // load
@@ -272,7 +278,7 @@ namespace MazeSolver
             this.btnSolve.FlatAppearance.BorderSize = 0;
             this.btnSolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(0, 225);
+            this.btnSolve.Location = new System.Drawing.Point(0, 345);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnSolve.Size = new System.Drawing.Size(250, 45);
@@ -287,7 +293,7 @@ namespace MazeSolver
             this.panelSolveSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panelSolveSubmenu.Controls.Add(this.btnBFS);
             this.panelSolveSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSolveSubmenu.Location = new System.Drawing.Point(0, 270);
+            this.panelSolveSubmenu.Location = new System.Drawing.Point(0, 390);
             this.panelSolveSubmenu.Name = "panelSolveSubmenu";
             this.panelSolveSubmenu.Size = new System.Drawing.Size(250, 40);
             this.panelSolveSubmenu.TabIndex = 7;
@@ -353,7 +359,7 @@ namespace MazeSolver
             this.panelOtherSubmenu.Controls.Add(this.btnShowPaths);
             this.panelOtherSubmenu.Controls.Add(this.btnShowJunctions);
             this.panelOtherSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelOtherSubmenu.Location = new System.Drawing.Point(0, 355);
+            this.panelOtherSubmenu.Location = new System.Drawing.Point(0, 475);
             this.panelOtherSubmenu.Name = "panelOtherSubmenu";
             this.panelOtherSubmenu.Size = new System.Drawing.Size(250, 80);
             this.panelOtherSubmenu.TabIndex = 9;
@@ -384,7 +390,7 @@ namespace MazeSolver
             this.btnOther.FlatAppearance.BorderSize = 0;
             this.btnOther.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOther.ForeColor = System.Drawing.Color.White;
-            this.btnOther.Location = new System.Drawing.Point(0, 310);
+            this.btnOther.Location = new System.Drawing.Point(0, 430);
             this.btnOther.Name = "btnOther";
             this.btnOther.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnOther.Size = new System.Drawing.Size(250, 45);
@@ -393,6 +399,63 @@ namespace MazeSolver
             this.btnOther.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOther.UseVisualStyleBackColor = false;
             this.btnOther.Click += new System.EventHandler(this.btnOther_Click);
+            // 
+            // btnLargeMaze
+            // 
+            this.btnLargeMaze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(62)))), ((int)(((byte)(89)))));
+            this.btnLargeMaze.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLargeMaze.FlatAppearance.BorderSize = 0;
+            this.btnLargeMaze.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(182)))), ((int)(((byte)(217)))));
+            this.btnLargeMaze.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(98)))), ((int)(((byte)(140)))));
+            this.btnLargeMaze.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLargeMaze.ForeColor = System.Drawing.Color.White;
+            this.btnLargeMaze.Location = new System.Drawing.Point(0, 160);
+            this.btnLargeMaze.Name = "btnLargeMaze";
+            this.btnLargeMaze.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
+            this.btnLargeMaze.Size = new System.Drawing.Size(250, 40);
+            this.btnLargeMaze.TabIndex = 1;
+            this.btnLargeMaze.Text = "Large Maze";
+            this.btnLargeMaze.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLargeMaze.UseVisualStyleBackColor = false;
+            this.btnLargeMaze.Click += new System.EventHandler(this.btnLargeMaze_Click);
+            // 
+            // btnMediumMaze
+            // 
+            this.btnMediumMaze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(62)))), ((int)(((byte)(89)))));
+            this.btnMediumMaze.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnMediumMaze.FlatAppearance.BorderSize = 0;
+            this.btnMediumMaze.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(182)))), ((int)(((byte)(217)))));
+            this.btnMediumMaze.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(98)))), ((int)(((byte)(140)))));
+            this.btnMediumMaze.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMediumMaze.ForeColor = System.Drawing.Color.White;
+            this.btnMediumMaze.Location = new System.Drawing.Point(0, 120);
+            this.btnMediumMaze.Name = "btnMediumMaze";
+            this.btnMediumMaze.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
+            this.btnMediumMaze.Size = new System.Drawing.Size(250, 40);
+            this.btnMediumMaze.TabIndex = 1;
+            this.btnMediumMaze.Text = "Medium Maze";
+            this.btnMediumMaze.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMediumMaze.UseVisualStyleBackColor = false;
+            this.btnMediumMaze.Click += new System.EventHandler(this.btnMediumMaze_Click);
+            // 
+            // btnSmallMaze
+            // 
+            this.btnSmallMaze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(62)))), ((int)(((byte)(89)))));
+            this.btnSmallMaze.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSmallMaze.FlatAppearance.BorderSize = 0;
+            this.btnSmallMaze.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(182)))), ((int)(((byte)(217)))));
+            this.btnSmallMaze.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(98)))), ((int)(((byte)(140)))));
+            this.btnSmallMaze.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSmallMaze.ForeColor = System.Drawing.Color.White;
+            this.btnSmallMaze.Location = new System.Drawing.Point(0, 80);
+            this.btnSmallMaze.Name = "btnSmallMaze";
+            this.btnSmallMaze.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
+            this.btnSmallMaze.Size = new System.Drawing.Size(250, 40);
+            this.btnSmallMaze.TabIndex = 3;
+            this.btnSmallMaze.Text = "Small Maze";
+            this.btnSmallMaze.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSmallMaze.UseVisualStyleBackColor = false;
+            this.btnSmallMaze.Click += new System.EventHandler(this.btnSmallMaze_Click);
             // 
             // MazeSolver
             // 
@@ -404,6 +467,7 @@ namespace MazeSolver
             this.Controls.Add(this.panelSideMenu);
             this.Name = "MazeSolver";
             this.Text = "Form1";
+            this.ResizeEnd += new System.EventHandler(this.MazeSolver_Resize);
             this.panelTimers.ResumeLayout(false);
             this.panelTimers.PerformLayout();
             this.panelChildForm.ResumeLayout(false);
@@ -449,6 +513,9 @@ namespace MazeSolver
         private System.Windows.Forms.Panel panelOtherSubmenu;
         private System.Windows.Forms.Button btnShowPaths;
         private System.Windows.Forms.Button btnOther;
+        private System.Windows.Forms.Button btnLargeMaze;
+        private System.Windows.Forms.Button btnMediumMaze;
+        private System.Windows.Forms.Button btnSmallMaze;
     }
 }
 

@@ -150,5 +150,13 @@ namespace MazeSolver
                 westNode.addPath(MazeJunction.DirectionType.east, newJunction);
             }
         }
+
+        public void ResetJunctions()
+        {
+            foreach(MazeJunction junction in junctions)
+            {
+                junction.visited = false;
+            }
+        }
     }
 }

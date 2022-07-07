@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MazeSolver
 {
@@ -14,10 +15,36 @@ namespace MazeSolver
 
         public BitmapLoader()
         {
-            //directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\63x63\Maze_Diagonal_1.bmp";
-            //directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\21x21\big.bmp";
 
-            directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\63x63\Maze_Prims_1.bmp";
+
+        }
+
+        public void setDirectory(MazeSolver.FileToLoad fileToLoad)
+        {
+            switch (fileToLoad)
+            {
+                case MazeSolver.FileToLoad.Default:
+                    OpenFileDialog fdlg = new OpenFileDialog();
+
+                    if (fdlg.ShowDialog() == DialogResult.OK)
+                    {
+                        directory = fdlg.FileName;
+                    }
+
+                    break;
+                case MazeSolver.FileToLoad.Small:
+                    directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\test\150x150.bmp";
+                    break;
+                case MazeSolver.FileToLoad.Medium:
+                    directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\test\200x200.bmp";
+                    break;
+                case MazeSolver.FileToLoad.Large:
+                    directory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\Mazes\test\250x250.bmp";
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         public int[,] ImageLoader()

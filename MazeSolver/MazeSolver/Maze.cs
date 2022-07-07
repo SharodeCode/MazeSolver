@@ -113,6 +113,22 @@ namespace MazeSolver
             }
         }
 
+        public void hideSolution()
+        {
+            for (int i = 1; i < (maze.GetLength(1) - 1); i++)
+            {
+                for (int j = 1; j < (maze.GetLength(0) - 1); j++)
+                {
+                    if (maze[j, i] == (int)Maze.MazeType.Solution)
+                    {
+                        maze[j, i] = (int)Maze.MazeType.Path;
+                    }
+                }
+            }
+
+            mazeGraph.ResetJunctions();
+        }
+
         public void connectJunctions(MazeJunction start, MazeJunction end)
         {
             

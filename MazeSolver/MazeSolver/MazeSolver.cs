@@ -96,6 +96,12 @@ namespace MazeSolver
             {
                 btnShowPaths_Click(btnShowPaths, EventArgs.Empty);
             }
+
+            if (visibleSolution)
+            {
+                maze.hideSolution();
+            }
+
         }
 
         private Bitmap ResizeBitmap(Bitmap image, int width, int height)
@@ -148,10 +154,7 @@ namespace MazeSolver
                 }
             }
 
-            image = ResizeBitmap(image, imageWidth, imageHeight);
-
-            pictureBoxMaze.Image = image;
-            pictureBoxMaze.Refresh();
+            RefreshImage(true);
         }
 
         private void showJunctions_Click(object sender, EventArgs e)
@@ -215,16 +218,49 @@ namespace MazeSolver
 
         private void load_Click(object sender, EventArgs e)
         {
+            MazeLoadAndInitialise(FileToLoad.Default);
 
+        }
+
+        private void btnSmallMaze_Click(object sender, EventArgs e)
+        {
+            MazeLoadAndInitialise(FileToLoad.Small);
+        }
+
+        private void btnMediumMaze_Click(object sender, EventArgs e)
+        {
+            MazeLoadAndInitialise(FileToLoad.Medium);
+        }
+
+        private void btnLargeMaze_Click(object sender, EventArgs e)
+        {
+            MazeLoadAndInitialise(FileToLoad.Large);
+        }
+
+        private void MazeLoadAndInitialise(FileToLoad fileToLoad)
+        {
             panelMazeSoler.Visible = true;
             panelTitle.Visible = false;
 
-            // Start Timer
-            System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
-            
             BitmapLoader bl = new BitmapLoader();
 
-            int[,] test = bl.ImageLoader();
+            switch (fileToLoad)
+            {
+                case FileToLoad.Default:
+                    bl.setDirectory(fileToLoad);
+                    break;
+                case FileToLoad.Small:
+                    bl.setDirectory(fileToLoad);
+                    break;
+                case FileToLoad.Medium:
+                    bl.setDirectory(fileToLoad);
+                    break;
+                case FileToLoad.Large:
+                    bl.setDirectory(fileToLoad);
+                    break;
+                default:
+                    break;
+            }
 
             image = new Bitmap(bl.directory);
 
@@ -237,10 +273,16 @@ namespace MazeSolver
             pictureBoxMaze.Image = image;
             this.Width = image.Width + 1000;
             this.Height = image.Height + 250;
+
+            // Start Timer
+            System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+
+            int[,] test = bl.ImageLoader();
             maze = new Maze(test);
 
             // Stop timer and print results
             watch.Stop();
+
             loadImageTime = watch.Elapsed;
             labelMazeLoadTime.Text = "Maze Load Time: " + loadImageTime.Minutes.ToString() + ":" + loadImageTime.Seconds.ToString() + ":" + loadImageTime.Milliseconds.ToString();
 
@@ -274,9 +316,20 @@ namespace MazeSolver
             maze.printSolution(solution);
 
             RefreshBitmap();
+            RefreshImage(false);
 
             visibleSolution = true;
         }
+
+        public enum FileToLoad
+        {
+            Default = 0,
+            Small = 1,
+            Medium = 2,
+            Large = 3,
+        }
+
+
 
         private void btnFile_Click(object sender, EventArgs e)
         {
@@ -293,5 +346,42 @@ namespace MazeSolver
             ShowSubMenu(panelOtherSubmenu);
         }
 
+        private void MazeSolver_Resize(object sender, EventArgs e)
+        {
+            RefreshImage(false);
+        }
+
+        private void RefreshImage(bool bitmapRefresh)
+        {
+            if (image == null)
+                return;
+
+            int dimension = 0;
+            int widthToFill = (this.Width - 250 - 390 - 150);
+            int heightToFill = this.Height - 250;
+
+            if (widthToFill < heightToFill)
+            {
+                dimension = widthToFill;
+            }
+            else
+            {
+                dimension = heightToFill;
+            }
+
+            if (maze != null && bitmapRefresh != true)
+            {
+                RefreshBitmap();
+            }
+
+            pictureBoxMaze.Width = dimension;
+            pictureBoxMaze.Height = dimension;
+
+            image = ResizeBitmap(image, dimension, dimension);
+
+            pictureBoxMaze.Image = image;
+
+            pictureBoxMaze.Refresh();
+        }
     }
 }

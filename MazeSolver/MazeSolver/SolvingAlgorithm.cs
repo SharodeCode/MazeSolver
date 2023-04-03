@@ -86,5 +86,54 @@ namespace MazeSolver
 
             return solution;
         }
+
+        public List<MazeJunction> DepthFirst(Maze maze)
+        {
+            List<MazeJunction> solution = new List<MazeJunction>();
+            Dictionary<MazeJunction, MazeJunction> parents = new Dictionary<MazeJunction, MazeJunction>();
+            MazeJunction s = maze.getStartJunction();
+
+            Stack<MazeJunction> stack = new Stack<MazeJunction>();
+
+            s.visited = true;
+            stack.Push(s);
+
+            while (stack.Any())
+            {
+                s = stack.Pop();
+
+                if (s.Equals(maze.getEndJunction()))
+                {
+                    break;
+                }
+
+                MazeJunction[] neighbors = { s.north, s.south, s.east, s.west };
+
+                foreach (MazeJunction neighbor in neighbors)
+                {
+                    if (neighbor != null && !neighbor.visited)
+                    {
+                        neighbor.visited = true;
+                        stack.Push(neighbor);
+
+                        if (!parents.ContainsKey(neighbor))
+                        {
+                            parents.Add(neighbor, s);
+                        }
+                    }
+                }
+            }
+
+            MazeJunction parent = s;
+
+            while (parent != maze.getStartJunction())
+            {
+                solution.Add(parent);
+                parent = parents[parent];
+            }
+
+            solution.Reverse();
+            return solution;
+        }
     }
 }

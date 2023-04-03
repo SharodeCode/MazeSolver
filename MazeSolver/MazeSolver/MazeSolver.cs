@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -307,6 +307,33 @@ namespace MazeSolver
             SolvingAlgorithm solver = new SolvingAlgorithm();
 
             List<MazeJunction> solution = solver.BreadthFirst(maze);
+
+            // Stop timer and print results
+            watch.Stop();
+            solveMazeTime = watch.Elapsed;
+            labelMazeSolveTime.Text = "Maze Solve Time: " + solveMazeTime.Minutes.ToString() + ":" + solveMazeTime.Seconds.ToString() + ":" + solveMazeTime.Milliseconds.ToString();
+
+            maze.printSolution(solution);
+
+            RefreshBitmap();
+            RefreshImage(false);
+
+            visibleSolution = true;
+        }
+
+        private void btnDFS_Click(object sender, EventArgs e)
+        {
+            if (!visibleMaze)
+                return;
+
+            HideOtherVisualisations(VisualisationType.Solution);
+
+            // Start Timer
+            System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+
+            SolvingAlgorithm solver = new SolvingAlgorithm();
+
+            List<MazeJunction> solution = solver.DepthFirst(maze);
 
             // Stop timer and print results
             watch.Stop();
